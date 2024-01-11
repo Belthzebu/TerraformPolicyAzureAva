@@ -14,10 +14,10 @@ provider "azurerm" {
 }
 
 resource "azurerm_policy_set_definition" "HiRiskProdTerraform" {
-  name         = "IveGrpEU-Definition-Hig-Prod"
+  name         = "TerraformInitiative"
   policy_type  = "Custom"
-  display_name = "IveGrpEU-Definition-Hig-Prod"
-  management_group_id = "/providers/Microsoft.Management/managementGroups/IveGrpEU-High-Risk-Prod"
+  display_name = "TerraformInitiative"
+  management_group_id = "/providers/Microsoft.Management/managementGroups/AvanadeManGroup"
 
     parameters = <<PARAMETERS
     {
@@ -169,9 +169,6 @@ resource "azurerm_policy_set_definition" "HiRiskProdTerraform" {
 		policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/797b37f7-06b8-444c-b1ad-fc62867f335a"
 	}
 	policy_definition_reference {
-		policy_definition_id = "/providers/Microsoft.Management/managementGroups/IveGrpEU/providers/Microsoft.Authorization/policyDefinitions/Deny-PublicEndpoint-MariaDB"
-	}
-	policy_definition_reference {
 		policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/1b8ca024-1d5c-4dec-8995-b1a932b41780"
 	}
 	policy_definition_reference {
@@ -201,9 +198,9 @@ resource "azurerm_policy_set_definition" "HiRiskProdTerraform" {
 }
 
 resource "azurerm_management_group_policy_assignment" "example-assign" {
-  name                 = "IveGrpEU-Assign-Hig-Prod"
+  name                 = "TerraformInitiative"
   policy_definition_id = azurerm_policy_set_definition.HiRiskProdTerraform.id
-  management_group_id  = "/providers/Microsoft.Management/managementGroups/IveGrpEU-High-Risk-Prod"
+  management_group_id  = "/providers/Microsoft.Management/managementGroups/AvanadeManGroup"
   enforce = false
 
   parameters = <<PARAMETERS
